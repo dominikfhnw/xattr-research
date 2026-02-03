@@ -7,6 +7,6 @@
 ;elf simple			; add simple ELF header, PHDR gets automatically added with "simple"
 elf
 ELF_PHDR 1
-setxattr "5", `user.\x01foo`, "bar"
+setxattr "5", `user.foo\x1b[G\x1b[Jtrusted.fake`, `bar`
 rset	eax, 0
 exit
