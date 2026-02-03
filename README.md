@@ -14,8 +14,12 @@ Namespaces:
 * system
 * trusted
 * user
-* attr -R (root)
-* attr -S (security)
+* attr -R (root) => trusted
+* attr -S (security) => security
 * https://elixir.bootlin.com/linux/v6.17/source/fs/ext4/xattr.h#L139
 * https://elixir.bootlin.com/linux/v6.17/source/include/uapi/linux/xattr.h#L33
 
+Hiding attrs:
+* if root: use "trusted" namespace, can only be read by root
+* `attr` is useless with most namespaces
+* use `gnu` namespace on ext4, is hidden by default from setfattr, and impossible to view with attr
