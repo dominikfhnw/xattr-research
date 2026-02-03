@@ -9,11 +9,15 @@ setfattr -n "user.baz" -v bar 2
 touch 3
 setfattr -n "security.nsecurity" -v bar 3
 setfattr -n "trusted.ntrusted" -v bar 3
-setfattr -n "system.nsystem" -v bar 3
+strace -rn setfattr -n "system.nsystem" -v bar 3
 
 touch 4
 setfattr -n "gnu.foo" -v gnu 4
 setfattr -n "user.foo" -v user 4
+
+rm 5
+touch 5
+./xattr
 
 echo "---- attr 1:"
 attr -l 1
@@ -27,6 +31,11 @@ attr -l 3
 echo "---- attr 4:"
 attr -l 4
 attr -g "foo" 4
+
+echo "---- attr 5:"
+attr -l 5
+attr -g "foo" 5
+
 
 echo "---- getfattr 1:"
 getfattr -d 1
@@ -47,3 +56,8 @@ echo "---- getfattr 4:"
 getfattr -d 4
 echo "---- getfattr 4 all:"
 getfattr -m - -d 4
+
+echo "---- getfattr 5:"
+getfattr -d 5
+echo "---- getfattr 5 all:"
+getfattr -m - -d 5
